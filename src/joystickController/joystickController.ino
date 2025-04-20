@@ -10,7 +10,10 @@
 #define JoyStick2_Y  A5 // y
 #define JoyStick2_Z  A7 // key
 
-#define AXES_JOYSTICK_SCALAR 0x7FFF / 0xFFF
+#define ANALOG_MIN 0
+#define ANALOG_MAX 0xFFF
+#define AXES_MIN 0
+#define AXES_MAX 0x7FFF
 
 BleGamepad bleGamepad;
 void setup()
@@ -30,15 +33,15 @@ void setup()
 void loop()
 {
   int16_t x1, y1, z1, x2, y2, z2;
-  x1 = analogRead(JoyStick1_X) * AXES_JOYSTICK_SCALAR;
-  y1 = analogRead(JoyStick1_Y) * AXES_JOYSTICK_SCALAR;
+  x1 = map(analogRead(JoyStick1_X), ANALOG_MIN, ANALOG_MAX, AXES_MIN, AXES_MAX);
+  y1 = map(analogRead(JoyStick1_Y), ANALOG_MIN, ANALOG_MAX, AXES_MAX, AXES_MIN); // For some strange reason, Y axes here is inverted
   z1 = digitalRead(JoyStick1_Z);
 
-  x2 = analogRead(JoyStick2_X) * AXES_JOYSTICK_SCALAR;
-  y2 = analogRead(JoyStick2_Y) * AXES_JOYSTICK_SCALAR;
+  x2 = map(analogRead(JoyStick2_X), ANALOG_MIN, ANALOG_MAX, AXES_MIN, AXES_MAX);
+  y2 = map(analogRead(JoyStick2_Y), ANALOG_MIN, ANALOG_MAX, AXES_MIN, AXES_MAX);
   z2 = digitalRead(JoyStick2_Z);
-  
-  bleGamepad.setLeftThumb(x1, y1); // Temp fix: Y axes is inverted for some reason. Uses Two's compliment to correct
+
+  bleGamepad.setLeftThumb(x1, y1); 
   bleGamepad.setRightThumb(x2, y2);
   
 }
