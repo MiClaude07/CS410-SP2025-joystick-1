@@ -1,8 +1,3 @@
-// controller.js
-// ------------
-// Reads joystick inputs and lets your teammate call:
-// Controller.getLeftX(), Controller.isButton1Pressed(), etc.
-
 const Controller = (() => {
 
     // Stores the connected gamepad
@@ -13,21 +8,20 @@ const Controller = (() => {
   
     // Stores the latest input values
     const s = {
-      lx: 0,  // left stick X
-      ly: 0,  // left stick Y
-      rx: 0,  // right stick X
-      ry: 0,  // right stick Y
+      lx: 0, // left stick X
+      ly: 0, // left stick Y
+      rx: 0, // right stick X
+      ry: 0, // right stick Y
       b1: false, // left stick pressed
-      b2: false  // right stick pressed OR spacebar
+      b2: false // right stick pressed OR spacebar
     };
   
-    // Call this once to start everything
     function init() {
-      // Listen when a controller connects or disconnects
+      // Listen when a controller connects/disconnects
       window.addEventListener('gamepadconnected', e => gp = e.gamepad);
       window.addEventListener('gamepaddisconnected', () => gp = null);
   
-      // Spacebar also counts as button 2
+      // Spacebar counts as button 2
       window.addEventListener('keydown', e => {
         if (e.code === 'Space') spaceDown = true;
       });
@@ -39,7 +33,7 @@ const Controller = (() => {
       requestAnimationFrame(loop);
     }
   
-    // Runs every frame to update the values
+    // Run every frame to update the values
     function loop() {
       if (gp) {
         const g = navigator.getGamepads()[gp.index];
@@ -55,7 +49,7 @@ const Controller = (() => {
       requestAnimationFrame(loop); // run again next frame
     }
   
-    // These functions return the current values
+    // return the current values
     return {
       init,
       getLeftX: () => s.lx,
