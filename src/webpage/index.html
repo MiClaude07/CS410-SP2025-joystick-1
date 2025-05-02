@@ -25,58 +25,16 @@
             import * as THREE from 'three';
             import { OrbitControls } from 'three/addons/controls/OrbitControls.js';  
             import { STLLoader } from 'three/addons/loaders/STLLoader.js';
-            let renderer, control, scene, camera, group;
-            group = new THREE.Group();
+            import { Manager } from './manager.js'
 
             window.onload = function() {
-                scene = new THREE.Scene();
-
-                // setup the camera
-                let fov = 75;
-                let ratio = window.innerWidth/ window.innerHeight;
-                var zNear = 0.1;
-                let zFar = 10000;
-                camera = new THREE.PerspectiveCamera(fov, ratio, zNear, zFar);
-                camera.position.set(0, 0, 10);
-
-                // create renderer and add canvas to DOM
-                renderer = new THREE.WebGLRenderer({antialias: true});
-                renderer.setSize(window.innerWidth, window.innerHeight);
-                document.body.appendChild(renderer.domElement);
-
-                renderer.domElement.onmouseup = function() {
-                    control.enabled = true;
-                }
-
-                //setup lights
-                let ambientLight = new THREE.AmbientLight();
-                scene.add(ambientLight);
-
-                let light = new THREE.DirectionalLight(0xffffff, 5.0);
-                light.position.set(10, 100, 100);
-                scene.add(light);
-
-                let loader = new STLLoader();
-                loader.load('assets/controller.stl', function (stl) {
-                    scene.add(group);
-                    let material = new THREE.MeshStandardMaterial({ color: 0xFF0000});
-                    let mesh = new THREE.Mesh(stl, material);
-                    mesh.scale.set(0.07, 0.07, 0.07);
-                    mesh.position.set(0, -1, 0);
-                    mesh.rotateZ(Math.PI / 2);
-                    mesh.rotateY(Math.PI / 8);
-                    stl.center();
-                    group.add(mesh);
-                });
-
-                control = new OrbitControls(camera, renderer.domElement);
-
-                animate();
+                let manager = Manager;
+                manager.init();
+                animate(manager);
 
                 function animate() {
                     requestAnimationFrame(animate);
-                    renderer.render(scene, camera);
-                    group.rotation.y += 0.001;
+                    manager.animate()
                 }
             }
 

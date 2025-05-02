@@ -41,7 +41,7 @@ const Controller = (() => {
           s.lx =  g.axes[0]; // left stick X (left/right)
           s.ly = -g.axes[1]; // left stick Y (up/down) flipped
           s.rx =  g.axes[2]; // right stick X
-          s.ry = -g.axes[3]; // right stick Y flipped
+          s.ry =  -g.axes[5]; // right stick Y flipped (Changed from axes 3 to axes 5)
           s.b1 =  g.buttons[0].pressed; // button 1 (left stick click)
           s.b2 =  g.buttons[1].pressed || spaceDown; // button 2 or spacebar
         }
