@@ -85,7 +85,7 @@ const Manager = (() => {
     };
     function loadController() {
         let loader = new STLLoader();
-        loader.load('assets/controller_no_plate.stl', function (stl) {
+        loader.load('./assets/controller_no_plate.stl', function (stl) {
             let material = new THREE.MeshStandardMaterial({ color: 0xFF0000});
             let mesh = new THREE.Mesh(stl, material);
             mesh.scale.set(0.07, 0.07, 0.07);
