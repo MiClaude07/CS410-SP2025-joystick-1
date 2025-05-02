@@ -3,6 +3,8 @@ import { OrbitControls } from "https://unpkg.com/three@latest/examples/jsm/contr
 import { STLLoader } from 'https://unpkg.com/three@latest/examples/jsm/loaders/STLLoader.js';
 import { Controller } from './controller.js'
 
+
+// Manager object to keep track of THREE.js scene
 const Manager = (() => {
     console.log("Manager");
     let renderer, control, scene, camera, group, leftStickPadMesh, rightStickPadMesh, leftButton, rightButton;
@@ -83,7 +85,7 @@ const Manager = (() => {
     };
     function loadController() {
         let loader = new STLLoader();
-        loader.load('assets/no plate.stl', function (stl) {
+        loader.load('assets/controller_no_plate.stl', function (stl) {
             let material = new THREE.MeshStandardMaterial({ color: 0xFF0000});
             let mesh = new THREE.Mesh(stl, material);
             mesh.scale.set(0.07, 0.07, 0.07);
