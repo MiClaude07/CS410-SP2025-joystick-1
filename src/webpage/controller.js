@@ -13,7 +13,9 @@ const Controller = (() => {
       rx: 0, // right stick X
       ry: 0, // right stick Y
       b1: false, // left stick pressed
-      b2: false // right stick pressed OR spacebar
+      b2: false, // right stick pressed OR spacebar
+      b3: false, // left joystick pressed
+      b4: false, // right joystick pressed
     };
   
     function init() {
@@ -44,6 +46,8 @@ const Controller = (() => {
           s.ry =  -g.axes[5]; // right stick Y flipped (Changed from axes 3 to axes 5)
           s.b1 =  g.buttons[0].pressed; // button 1 (left stick click)
           s.b2 =  g.buttons[1].pressed || spaceDown; // button 2 or spacebar
+          s.b3 = g.buttons[10].pressed; // button 3 (left joystick pressed)
+          s.b4 = g.buttons[11].pressed; // button 4 (right joystick pressed)
         }
       }
       requestAnimationFrame(loop); // run again next frame
@@ -57,11 +61,12 @@ const Controller = (() => {
       getRightX: () => s.rx,
       getRightY: () => s.ry,
       isButton1Pressed: () => s.b1,
-      isButton2Pressed: () => s.b2
+      isButton2Pressed: () => s.b2,
+      isButton3Pressed: () => s.b3,
+      isButton4Pressed: () => s.b4
     };
   })();
   
   // Use it like:
   // import { Controller } from './controller.js'
   export { Controller };
-  
