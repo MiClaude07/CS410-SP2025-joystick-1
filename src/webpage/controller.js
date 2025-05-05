@@ -46,8 +46,8 @@ const Controller = (() => {
           s.ry =  -g.axes[5]; // right stick Y flipped (Changed from axes 3 to axes 5)
           s.b1 =  g.buttons[0].pressed; // button 1 (left stick click)
           s.b2 =  g.buttons[1].pressed || spaceDown; // button 2 or spacebar
-          s.b3 = g.buttons[10].pressed; // button 3 (left joystick pressed)
-          s.b4 = g.buttons[11].pressed; // button 4 (right joystick pressed)
+          s.b3 = g.buttons[9].pressed; // button 3 (left joystick pressed)
+          s.b4 = g.buttons[10].pressed; // button 4 (right joystick pressed)
         }
       }
       requestAnimationFrame(loop); // run again next frame

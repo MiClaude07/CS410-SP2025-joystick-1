@@ -11,6 +11,7 @@
 #define JOY_STICK_2_Z 33 // key
 
 #define RIGHT_BUTTON 25
+#define LEFT_BUTTON 27
 
 #define ANALOG_MIN 0     // Min Analog Reading
 #define ANALOG_MAX 0xFFF // Max Analog Reading
@@ -45,34 +46,43 @@ void loop()
     y2 = map(analogRead(JOY_STICK_2_Y), ANALOG_MIN, ANALOG_MAX, AXES_MAX, AXES_MIN);
     z2 = digitalRead(JOY_STICK_2_Z);
 
-    b1 = digitalRead(RIGHT_BUTTON);
+    b1 = digitalRead(LEFT_BUTTON);
+    b2 = digitalRead(RIGHT_BUTTON);
 
     bleGamepad.setLeftThumb(x1, y1);
     bleGamepad.setRightThumb(x2, y2);
 
     if (z1)
     {
-      bleGamepad.press(BUTTON_3);
+      bleGamepad.press(BUTTON_10);
     }
     else
     {
-      bleGamepad.release(BUTTON_3);
+      bleGamepad.release(BUTTON_10);
     }
     if (z2)
     {
-      bleGamepad.press(BUTTON_4);
+      bleGamepad.press(BUTTON_11);
     }
     else
     {
-      bleGamepad.release(BUTTON_4);
+      bleGamepad.release(BUTTON_11);
     }
-    if (!b1)
+    if (b1)
     {
       bleGamepad.press(BUTTON_1);
     }
     else
     {
       bleGamepad.release(BUTTON_1);
+    }
+    if (!b2)
+    {
+      bleGamepad.press(BUTTON_2);
+    }
+    else
+    {
+      bleGamepad.release(BUTTON_2);
     }
   }
   delay(10); // Short delay for Gamepad to register more consistent inputs

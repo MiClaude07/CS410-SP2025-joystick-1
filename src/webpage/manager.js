@@ -116,6 +116,16 @@ const Manager = (() => {
         } else {
             rightButton.material.color.setHex(0x000000);
         }
+        if (controller.isButton3Pressed()) {
+            leftStickPadMesh.material.color.setHex(0x00FF00);
+        } else {
+            leftStickPadMesh.material.color.setHex(0x000000);
+        }
+        if (controller.isButton4Pressed()) {
+            rightStickPadMesh.material.color.setHex(0x00FF00);
+        } else {
+            rightStickPadMesh.material.color.setHex(0x000000);
+        }
         animateSticks();
         renderer.render(scene, camera);
     };
