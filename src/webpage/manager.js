@@ -3,6 +3,8 @@ import { OrbitControls } from "https://unpkg.com/three@latest/examples/jsm/contr
 import { STLLoader } from 'https://unpkg.com/three@latest/examples/jsm/loaders/STLLoader.js';
 import { Controller } from './controller.js'
 
+// variable to track if the controller should spin or not
+let spinEnabled = true;
 
 // Manager object to keep track of THREE.js scene
 const Manager = (() => {
@@ -52,6 +54,15 @@ const Manager = (() => {
         createStickPadMeshes();
         createButtonMeshes();
         console.log("Init complete");
+
+        // create a Tweakpane UI panel to let user toggle spin on or off
+        const pane = new Tweakpane.Pane({ title: 'Toggle Spin' }); // create settings panel
+        const params = { spin: spinEnabled }; // create an object to hold our parameters
+        pane.addInput(params, 'spin') // add a toggle switch
+            .on('change', ev => {
+                // update spinEnabled when checkbox changes
+                spinEnabled = ev.value;
+            });
     };
     function createStickPadMeshes() {
         let geometry = new THREE.SphereGeometry(0.7, 32, 16, 0, 7, 0, 1.3);
@@ -105,7 +116,10 @@ const Manager = (() => {
         rightStickPadMesh.position.y = BASE_Y_THUMB  + rightypos;
     }
     function animate() {
-        group.rotation.y += 0.001;
+        // spin only when spinEnabled is true
+        if (spinEnabled) {
+            group.rotation.y += 0.001;
+        }
         if (controller.isButton1Pressed()) {
             leftButton.material.color.setHex(0x00FF00);
         } else {
