@@ -17,6 +17,7 @@ const Manager = (() => {
     let controller = Controller;
     controller.init();
     console.log(controller);
+    // Initialize THREE JS scene, camera, and renderer
     function init() {
         // Create THREE Scene
         scene = new THREE.Scene();
@@ -64,6 +65,7 @@ const Manager = (() => {
                 spinEnabled = ev.value;
             });
     };
+    // Creates stick mashes and put them in place
     function createStickPadMeshes() {
         let geometry = new THREE.SphereGeometry(0.7, 32, 16, 0, 7, 0, 1.3);
         let leftMaterial = new THREE.MeshStandardMaterial({ color: 0x000000});
@@ -80,6 +82,7 @@ const Manager = (() => {
         rightStickPadMesh.material.side = THREE.DoubleSide;
         group.add(rightStickPadMesh);
     };
+    // Create button meshes and put them in place
     function createButtonMeshes() {
         let geometry = new THREE.CylinderGeometry(0.5, 0.5, 0.5);
         let leftMaterial = new THREE.MeshStandardMaterial({ color: 0x000000});
@@ -94,6 +97,7 @@ const Manager = (() => {
         rightButton.position.set(2.35, 0.6, 0.75);
         group.add(rightButton);
     };
+    // Load controller 3D object
     function loadController() {
         let loader = new STLLoader();
         loader.load('./assets/controller_no_plate.stl', function (stl) {
@@ -105,6 +109,7 @@ const Manager = (() => {
             group.add(mesh);
         });
     };
+    // Animate sticks based on controller displacement
     function animateSticks() {
         let leftxpos = controller.getLeftX() / 2;
         let leftypos = controller.getLeftY() / 2;
@@ -115,6 +120,7 @@ const Manager = (() => {
         rightStickPadMesh.position.x = BASE_X_RIGHTTHUMB + rightxpos;
         rightStickPadMesh.position.y = BASE_Y_THUMB  + rightypos;
     }
+    // Animate controller
     function animate() {
         // spin only when spinEnabled is true
         if (spinEnabled) {

@@ -26,15 +26,12 @@
         }
         </script>
         <script type="module">
-            import * as THREE from 'three';
-            import { OrbitControls } from 'three/addons/controls/OrbitControls.js';  
-            import { STLLoader } from 'three/addons/loaders/STLLoader.js';
             import { Manager } from './manager.js'
 
             window.onload = function() {
                 let manager = Manager;
                 manager.init();
-                animate(manager);
+                animate();
 
                 function animate() {
                     requestAnimationFrame(animate);
