@@ -12,7 +12,6 @@
 
 #define RIGHT_BUTTON 25
 #define LEFT_BUTTON 27
-
 #define ANALOG_MIN 0     // Min Analog Reading
 #define ANALOG_MAX 0xFFF // Max Analog Reading
 #define AXES_MIN 0       // Min Axes Reading
