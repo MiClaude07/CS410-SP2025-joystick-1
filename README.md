@@ -2,7 +2,7 @@
 
 Capstone project for CS410. We will be developing a joystick controller!
 
-## User Manuel:
+## User Manual:
 
 ### Controller Setup
 
@@ -73,3 +73,9 @@ Capstone project for CS410. We will be developing a joystick controller!
 6. Find the game in your library
 
 7. Edit Gamepad Layout as so:
+  
+   Left Joystick Up - Up Arrow
+   Left Joystick Down - Down Arrow
+   Left Joystick Left - Left Arrow
+   Left Joystick Right - Right Arrow
+   Right Controller Button - Left Mouse Click 
